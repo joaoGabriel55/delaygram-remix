@@ -1,8 +1,7 @@
 import { redirect } from "react-router";
 import { Feed } from "~/components/feed/feed";
-import { getUserId } from "~/services/session.server";
 import type { Route } from "./+types/feed";
-
+import { getUser } from "~/services/auth.server";
 
 export function meta({}: Route.MetaArgs) {
   return [
@@ -13,12 +12,12 @@ export function meta({}: Route.MetaArgs) {
 
 export async function loader({ request }: Route.LoaderArgs) {
   // Check if the user is already logged in
-  const userId = await getUserId(request);
+  const user = await getUser(request);
 
-  if (!userId) {
+  if (!user) {
     throw redirect("/sign-in");
   } else {
-    return { userId };
+    return { userId: user.id };
   }
 }
 

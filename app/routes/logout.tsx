@@ -1,5 +1,5 @@
 import { redirect, type MetaFunction } from "react-router";
-import { logout } from "../services/session.server";
+import { logout } from "~/services/auth.server";
 import type { Route } from "./+types/logout";
 
 export const meta: MetaFunction = () => {
