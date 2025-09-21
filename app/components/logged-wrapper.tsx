@@ -9,7 +9,7 @@ export async function loader({ request }: Route.LoaderArgs) {
   if (!user) {
     throw redirect("/sign-in");
   } else {
-    return { userId: user.id };
+    return { userEmail: user.email };
   }
 }
 
@@ -22,7 +22,7 @@ export default function LoggedWrapper({
 
   return (
     <main className="flex flex-col justify-center p-4">
-      {data?.userId ? (
+      {data?.userEmail ? (
         <Form className="self-end" action="/logout" method="post">
           <button
             type="submit"
