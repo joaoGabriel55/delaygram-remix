@@ -18,11 +18,12 @@ export async function loader({ request }: Route.LoaderArgs) {
 
 export async function action({ request }: Route.ActionArgs) {
   try {
-    const user = await authenticator.authenticate("user-pass", request);
+    const response = await authenticator.authenticate("user-pass", request);
 
     return await createUserSession({
       request,
-      user,
+      user: response.userData,
+      token: response.jwtToken,
       remember: true,
       redirectUrl: "/",
     });

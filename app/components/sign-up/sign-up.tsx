@@ -1,11 +1,10 @@
-import { Link } from "react-router";
 import { Form } from "react-router";
 
-export function SignIn({ error }: { error?: string }) {
+export function SignUp({ error }: { error?: string }) {
   return (
     <main className="flex flex-col items-center justify-center gap-10 pt-16 pb-4">
       <header>
-        <h1 className="text-2xl font-bold">Sign In</h1>
+        <h1 className="text-2xl font-bold">Sign Up</h1>
       </header>
       <Form method="post" className="flex flex-col gap-8">
         <input
@@ -23,7 +22,7 @@ export function SignIn({ error }: { error?: string }) {
           required
         />
         <button className="bg-blue-400 p-2 rounded-sm w-2xs" type="submit">
-          Confirm
+          Create Account
         </button>
         {error ? (
           <div className="flex flex-row bg-red-400 w-2xs p-2 rounded-sm">
@@ -31,7 +30,6 @@ export function SignIn({ error }: { error?: string }) {
           </div>
         ) : null}
       </Form>
-      <Link to="/sign-up">Sign Up</Link>
     </main>
   );
 }
