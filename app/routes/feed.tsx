@@ -1,7 +1,6 @@
-import { redirect } from "react-router";
 import { Feed } from "~/components/feed/feed";
+import { postService } from "~/infrastructure/posts/post-service";
 import type { Route } from "./+types/feed";
-import { getUser } from "~/services/auth.server";
 
 export function meta({}: Route.MetaArgs) {
   return [
@@ -10,17 +9,12 @@ export function meta({}: Route.MetaArgs) {
   ];
 }
 
-export async function loader({ request }: Route.LoaderArgs) {
-  // Check if the user is already logged in
-  const user = await getUser(request);
+export async function loader() {
+  const posts = await postService.findAll();
 
-  if (!user) {
-    throw redirect("/sign-in");
-  } else {
-    return { userId: user.id };
-  }
+  return { posts, apiURL: process.env.API_URL };
 }
 
 export default function FeedPage({ loaderData }: Route.ComponentProps) {
-  return <Feed />;
+  return <Feed posts={loaderData.posts} apiURL={loaderData.apiURL || ""} />;
 }
