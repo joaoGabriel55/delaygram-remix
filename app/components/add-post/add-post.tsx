@@ -7,14 +7,15 @@ export function AddPost({ error }: { error?: string }) {
         <h1 className="text-4xl font-bold text-gray-900 dark:text-white">
           Add Post
         </h1>
-        <Link
-          className="p-2 rounded border"
-          to="/"
-        >
+        <Link className="p-2 rounded border" to="/">
           Cancel
         </Link>
       </header>
-      <Form method="post" className="flex flex-col gap-8 w-xs">
+      <Form
+        method="post"
+        encType="multipart/form-data"
+        className="flex flex-col gap-8 w-xs"
+      >
         <input
           className="border-slate-500 border p-2 rounded-sm"
           name="image"
@@ -29,7 +30,16 @@ export function AddPost({ error }: { error?: string }) {
           placeholder="Title"
           required
         />
-        <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" type="submit">
+        <textarea
+          className="border-slate-500 border p-2 rounded-sm"
+          name="description"
+          placeholder="Description"
+          required
+        />
+        <button
+          className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+          type="submit"
+        >
           Save
         </button>
         {error ? (

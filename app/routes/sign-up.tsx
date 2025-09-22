@@ -2,7 +2,7 @@ import { redirect } from "react-router";
 import { z } from "zod";
 import { SignUp } from "~/components/sign-up/sign-up";
 import { UserInputSchema } from "~/domain/users";
-import { userRepository } from "~/infrastructure/users/user-repository";
+import { userService } from "~/infrastructure/users/user-service";
 import { getUser } from "~/services/auth.server";
 import type { Route } from "./+types/sign-up";
 
@@ -35,7 +35,7 @@ export async function action({ request }: Route.ActionArgs) {
       return { error: z.prettifyError(parser.error) };
     }
 
-    await userRepository.create(parser.data);
+    await userService.create(parser.data);
 
     return redirect("/sign-in");
   } catch (error) {
