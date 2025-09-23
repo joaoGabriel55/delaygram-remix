@@ -16,31 +16,38 @@ export function Feed({ posts, apiURL }: { posts: Post[]; apiURL: string }) {
         </Link>
       </header>
       <section className="flex flex-col justify-center items-center gap-8">
-        {posts.map((post) => (
-          <div
-            key={post.id}
-            className="bg-white dark:bg-gray-800 rounded-lg shadow-md w-1/2"
-          >
-            <img
-              src={`${apiURL}${post.imageUrl}`}
-              alt={post.title}
-              className="w-full h-full object-cover rounded-t-lg"
-            />
-            <article className="p-4">
-              <div className="flex justify-between items-center">
-                <span className="text-gray-500 dark:text-gray-400 text-xs">
-                  {new Date(post.createdAt).toLocaleDateString()}
-                </span>
-              </div>
-              <h2 className="text-xl font-bold text-gray-900 dark:text-white">
-                {post.title}
-              </h2>
-              <p className="text-gray-700 dark:text-gray-300">
-                {post.description}
-              </p>
-            </article>
-          </div>
-        ))}
+        {posts.length > 0 ? (
+          posts.map((post) => (
+            <div
+              key={post.id}
+              className="bg-white dark:bg-gray-800 rounded-lg shadow-md w-1/2"
+            >
+              <img
+                src={`${apiURL}${post.imageUrl}`}
+                alt={post.title}
+                className="w-full h-full object-cover rounded-t-lg"
+              />
+              <article className="p-4">
+                <div className="flex justify-between items-center">
+                  <span className="text-gray-500 dark:text-gray-400 text-xs">
+                    {new Date(post.createdAt).toLocaleDateString()}
+                  </span>
+                </div>
+                <h2 className="text-xl font-bold text-gray-900 dark:text-white">
+                  {post.title}
+                </h2>
+                <p className="text-gray-700 dark:text-gray-300">
+                  {post.description}
+                </p>
+              </article>
+            </div>
+          ))
+        ) : (
+          <p className="text-gray-500 dark:text-gray-400 text-lg">
+            No posts found. Click on the "Add Post" button to create your first
+            post.
+          </p>
+        )}
       </section>
     </div>
   );

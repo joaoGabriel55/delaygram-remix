@@ -3,7 +3,6 @@ import { z } from "zod";
 import { SignUp } from "~/components/sign-up/sign-up";
 import { UserInputSchema } from "~/domain/users";
 import { userService } from "~/infrastructure/users/user-service";
-import { getUser } from "~/services/auth.server";
 import type { Route } from "./+types/sign-up";
 
 export function meta({}: Route.MetaArgs) {
@@ -11,12 +10,6 @@ export function meta({}: Route.MetaArgs) {
     { title: "Sign Up" },
     { name: "description", content: "Create a new account" },
   ];
-}
-
-export async function loader({ request }: Route.LoaderArgs) {
-  if (await getUser(request)) {
-    return redirect("/");
-  }
 }
 
 export async function action({ request }: Route.ActionArgs) {
