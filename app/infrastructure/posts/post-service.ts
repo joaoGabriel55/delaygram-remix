@@ -2,7 +2,7 @@ import type { Post, PostInput } from "~/domain/posts";
 import { HttpClient } from "../lib/http-client";
 
 export const postService = {
-  async create(post: PostInput, token: string): Promise<Post> {
+  async create(post: PostInput, token: string): Promise<void> {
     const httpClient = HttpClient();
 
     const formData = new FormData();
@@ -11,14 +11,12 @@ export const postService = {
     formData.append("description", post.description);
     formData.append("userId", post.userId);
 
-    const response = await httpClient.post<Post>("/api/posts", formData, {
+    await httpClient.post<Post>("/api/posts", formData, {
       headers: {
         Authorization: `Bearer ${token}`,
         "Content-Type": "multipart/form-data",
       },
     });
-
-    return response.data;
   },
 
   async findAll(): Promise<Post[]> {

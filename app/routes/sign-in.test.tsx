@@ -57,17 +57,13 @@ describe("SignInPage", () => {
   });
 
   describe("loader function", () => {
-    test("redirects to home when user is already authenticated", async () => {
+    test("redirects to '/' when user is already authenticated", async () => {
       const mockUser = { id: "123", email: "test@example.com" };
       vi.mocked(getUser).mockResolvedValue(mockUser);
 
       const result = await loader({ request: {} } as any);
 
-      expect(result).toEqual(
-        expect.objectContaining({
-          status: 302,
-        }),
-      );
+      expect(result).toEqual(expect.objectContaining({ status: 302 }));
     });
 
     test("does not redirect when user is not authenticated", async () => {
