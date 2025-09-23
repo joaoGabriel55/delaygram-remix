@@ -1,4 +1,5 @@
 import { Form } from "react-router";
+import { ErrorMessage } from "../ui/error-message";
 
 export function SignUp({ error }: { error?: string }) {
   return (
@@ -24,11 +25,7 @@ export function SignUp({ error }: { error?: string }) {
         <button className="bg-blue-400 p-2 rounded-sm w-2xs" type="submit">
           Create Account
         </button>
-        {error ? (
-          <div className="flex flex-row bg-red-400 w-2xs p-2 rounded-sm">
-            <p>{error}</p>
-          </div>
-        ) : null}
+        {error ? <ErrorMessage message={error} /> : null}
       </Form>
     </main>
   );

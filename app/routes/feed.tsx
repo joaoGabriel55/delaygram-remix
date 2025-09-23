@@ -10,9 +10,13 @@ export function meta({}: Route.MetaArgs) {
 }
 
 export async function loader() {
-  const posts = await postService.findAll();
+  try {
+    const posts = await postService.findAll();
 
-  return { posts, apiURL: process.env.API_URL };
+    return { posts, apiURL: process.env.API_URL };
+  } catch (error) {
+    return { posts: [], apiURL: process.env.API_URL };
+  }
 }
 
 export default function FeedPage({ loaderData }: Route.ComponentProps) {

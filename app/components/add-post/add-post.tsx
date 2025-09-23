@@ -1,4 +1,5 @@
 import { Form, Link } from "react-router";
+import { ErrorMessage } from "../ui/error-message";
 
 export function AddPost({ error }: { error?: string }) {
   return (
@@ -42,11 +43,7 @@ export function AddPost({ error }: { error?: string }) {
         >
           Save
         </button>
-        {error ? (
-          <div className="flex flex-row">
-            <p className="text-red-600 mt-4 ">{error}</p>
-          </div>
-        ) : null}
+        {error ? <ErrorMessage message={error} /> : null}
       </Form>
     </div>
   );
